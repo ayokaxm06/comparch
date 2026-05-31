@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: comparch-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py runserver 0.0.0.0:$PORT
+    envVars:
+      - key: DEBUG
+        value: "False"
+
+  - type: web
+    name: comparch-frontend
+    runtime: node
+    rootDir: frontend/courses-platform
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npx serve -s build
